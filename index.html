@@ -223,13 +223,8 @@ function drawRipples() {
   });
   requestAnimationFrame(drawRipples);
 }
+// ✅ No rogue setInterval here
 
-// 🌧️ Ambient ripples
-setInterval(() => {
-  const x = Math.random() * canvas.width;
-  const y = Math.random() * canvas.height;
-  createRipple(x, y);
-}, 800);
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -249,31 +244,35 @@ document.addEventListener('mousemove', (e) => {
   }
 });
 
+// 🌧️ Ambient ripples — managed version only
+let ambientInterval;
 
+function startAmbientRipples() {
+  if (!ambientInterval) {
+    ambientInterval = setInterval(() => {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      createRipple(x, y);
+    }, 800);
+  }
+}
 
+function stopAmbientRipples() {
+  clearInterval(ambientInterval);
+  ambientInterval = null;
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    startAmbientRipples();
+  } else {
+    stopAmbientRipples();
+  }
+});
+
+// Start initially
+startAmbientRipples();
 drawRipples();
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
