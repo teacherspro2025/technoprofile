@@ -255,19 +255,20 @@ document.addEventListener('mousemove', (e) => {
   }
 });
 
+let lastTouchTime = 0;
+
 document.addEventListener('touchmove', (e) => {
-  if (e.target.tagName !== 'BUTTON') return; // Optional: only ripple on buttons
-  e.preventDefault();
   const now = Date.now();
-  if (now - lastMouseTime > 80) {
+  if (now - lastTouchTime > 300) { // ⏱️ Throttle to every 300ms
     const touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
     const x = touch.clientX - rect.left;
     const y = touch.clientY - rect.top;
     createRipple(x, y);
-    lastMouseTime = now;
+    lastTouchTime = now;
   }
-}, { passive: false });
+}, { passive: true }); // ✅ Passive = allows scrolling
+
 document.querySelectorAll('button').forEach(btn => {
   btn.addEventListener('touchstart', (e) => {
     const touch = e.touches[0];
@@ -309,5 +310,6 @@ drawRipples();
 </script>
 </body>
 </html>
+
 
 
