@@ -277,16 +277,6 @@ document.querySelectorAll('button').forEach(btn => {
     createRipple(x, y);
   });
 });
-btn.addEventListener('touchstart', (e) => {
-  e.stopPropagation(); // Prevents duplicate ripple from global listener
-  const touch = e.touches[0];
-  const rect = canvas.getBoundingClientRect();
-  const x = touch.clientX - rect.left;
-  const y = touch.clientY - rect.top;
-  createRipple(x, y);
-});
-
-
 // 🌧️ Ambient ripples — managed version only
 let ambientInterval;
 
@@ -319,4 +309,5 @@ drawRipples();
 </script>
 </body>
 </html>
+
 
