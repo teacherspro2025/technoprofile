@@ -4,12 +4,15 @@
 <style>
 /* ==== GLOBAL DARK THEME ==== */
 body {
-  background: #111827; /* soft dark-blue night */
+  background: #111827;
   margin: 0;
-  overflow: hidden;
   color: #e0e0e0;
   font-family: system-ui;
+
+  overflow-x: hidden; /* keep clean layout */
+  overflow-y: auto;   /* scrolling restored */
 }
+
 
 
 /* Background canvas for ripple */
@@ -340,3 +343,4 @@ drawRipples();
 
 </body>
 </html>
+
