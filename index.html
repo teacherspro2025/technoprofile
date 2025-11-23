@@ -2,33 +2,125 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+/* ==== GLOBAL DARK THEME ==== */
+body {
+  background: #111827; /* soft dark-blue night */
+  margin: 0;
+  overflow: hidden;
+  color: #e0e0e0;
+  font-family: system-ui;
+}
+
+
+/* Background canvas for ripple */
+#rippleCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+/* === STAR LAYERS — ALL USE INFINITE TILE SCROLL === */
+#stars, #stars2, #stars3 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -2;
+
+  background-repeat: repeat;
+  background-size: 450px 450px; /* controls tiling density */
+}
+
+
+/* === LAYER 1 — MANY tiny stars === */
+#stars {
+  background-image:
+    radial-gradient(3px 3px at 10% 15%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(3px 3px at 25% 60%, rgba(255,255,255,0.55), transparent),
+    radial-gradient(3px 3px at 40% 30%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(3px 3px at 60% 85%, rgba(255,255,255,0.45), transparent),
+    radial-gradient(3px 3px at 75% 20%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(3px 3px at 90% 70%, rgba(255,255,255,0.35), transparent),
+    radial-gradient(3px 3px at 5% 90%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(3px 3px at 50% 50%, rgba(255,255,255,0.45), transparent),
+    radial-gradient(3px 3px at 95% 30%, rgba(255,255,255,0.55), transparent),
+    radial-gradient(3px 3px at 35% 10%, rgba(255,255,255,0.5), transparent);
+  animation: drift1 480s linear infinite;
+  opacity: 0.9;
+}
+
+
+/* === LAYER 2 — medium bright stars === */
+#stars2 {
+  background-image:
+    radial-gradient(6px 6px at 15% 25%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(6px 6px at 45% 75%, rgba(255,255,255,0.85), transparent),
+    radial-gradient(6px 6px at 70% 40%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(6px 6px at 85% 65%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(5px 5px at 5% 55%, rgba(255,255,255,0.75), transparent),
+    radial-gradient(5px 5px at 30% 15%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(6px 6px at 95% 80%, rgba(255,255,255,0.85), transparent);
+  animation: drift2 460s linear infinite;
+}
+
+
+/* === LAYER 3 — foreground large stars (twinkling) === */
+#stars3 {
+  background-image:
+    radial-gradient(9px 9px at 20% 50%, rgba(255,255,255,1), transparent),
+    radial-gradient(9px 9px at 80% 20%, rgba(255,255,255,0.95), transparent),
+    radial-gradient(8px 8px at 55% 10%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(8px 8px at 10% 85%, rgba(255,255,255,1), transparent);
+  animation: drift3 540s linear infinite, twinkle 4s ease-in-out infinite;
+}
+
+
+/* === Infinite scrolling via background-position === */
+@keyframes drift1 {
+  from { background-position: 0 0; }
+  to   { background-position: 0 -4500px; }
+}
+
+@keyframes drift2 {
+  from { background-position: 0 0; }
+  to   { background-position: 0 -6500px; }
+}
+
+@keyframes drift3 {
+  from { background-position: 0 0; }
+  to   { background-position: 0 -9000px; }
+}
+
+
+/* === Twinkling for front stars === */
+@keyframes twinkle {
+  0% { opacity: 0.5; }
+  50% { opacity: 1.0; }
+  100% { opacity: 0.5; }
+}
+
+/* ==== TITLES ==== */
 h1, h2 {
   margin: 20px auto;
   padding: 20px;
   max-width: 90%;
   box-sizing: border-box;
+  text-align: center;
+  border-radius: 36px;
+  color: white;
+  background: #383838;
 }
 
-h1 {
-  font-size: 32px;
-    text-align: center;
-    color: white;
-  background-color: DimGray;
-font-family: system-ui;
-   border: 0px;
-    border-radius: 36px;
+h1 { font-size: 32px; }
+h2 { font-size: 22px; opacity: 0.8; }
 
-}
-h2 {
-  font-size: 24px;
-    text-align: center;
-    color: white;
-  background-color: DimGray;
-font-family: system-ui;
-   border: 0px;
-    border-radius: 36px;
-
-}
+/* ==== BUTTON GRID ==== */
 .button-container {
   display: flex;
   justify-content: center;
@@ -47,108 +139,38 @@ font-family: system-ui;
   margin: 0 auto;
 }
 
-
-.button8c {
-    padding: 50px 50px;
-    border: 0px;
-    border-radius: 36px;
-    color: buttontext;
-    background-color: BurlyWood;
-    text-align: center;
-    text-decoration: none;
-    margin: 8px 20px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    font-size: 22px;
-    color: white;
-font-family: system-ui;
-}
-.button8c:hover {
-  background-color: darkgray;
-  color: white;
-}
-.button9c {
-    padding: 50px 50px;
-    border: 0px;
-    border-radius: 36px;
-    color: buttontext;
-    background-color: Gray;
-    text-align: center;
-    text-decoration: none;
-    margin: 8px 20px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    font-size: 22px;
-    color: white;
-font-family: system-ui;
-}
-.button9c:hover {
-  background-color: darkgray;
-  color: white;
-}
-.button10c {
-    padding: 50px 50px;
-    border: 0px;
-    border-radius: 36px;
-    color: buttontext;
-    background-color: LightSlateGrey;
-    text-align: center;
-    text-decoration: none;
-    margin: 8px 20px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    font-size: 22px;
-    color: white;
-font-family: system-ui;
-}
-.button10c:hover {
-  background-color: darkgray;
-  color: white;
-}
-.button11c {
-    padding: 50px 50px;
-    border: 0px;
-    border-radius: 36px;
-    color: buttontext;
-    background-color: RebeccaPurple;
-    text-align: center;
-    text-decoration: none;
-    margin: 8px 20px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    font-size: 22px;
-    color: white;
-font-family: system-ui;
-}
-.button11c:hover {
-  background-color: darkgray;
-  color: white;
-}
-body {
- background-color: lightgray;
-  font-size: 40px;
-}
-#rippleCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100vw;
-  height: 100vh;
-  background-color: lightgray;
-  pointer-events: none;
-}
-.button8c,
-.button9c,
-.button10c,
-.button11c {
+.button8c, .button9c, .button10c, .button11c {
+  width: 100%;
+  max-width: 400px;
+  padding: 50px;
+  border: 0;
+  border-radius: 36px;
+  font-size: 22px;
+  cursor: pointer;
+  font-family: system-ui;
+  color: #fff;
   position: relative;
   overflow: hidden;
-width: 100%;
-  max-width: 400px;
-  box-sizing: border-box;
+  transition: background-color 0.3s ease, transform 0.15s;
+  z-index: 1;
 }
 
+/* Fixed rising brightness sequence */
+.button8c { background-color: #1e1e1e; } /* darkest */
+.button9c { background-color: #2b2b2b; } /* darker */
+.button10c { background-color: #383838; } /* medium-dark */
+.button11c { background-color: #454545; } /* lightest */
+
+/* Hover brightness bump */
+.button8c:hover,
+.button9c:hover,
+.button10c:hover,
+.button11c:hover {
+  filter: brightness(1.25);
+  transform: translateY(-3px);
+}
+
+/* Light slide overlay */
 .button8c::before,
 .button9c::before,
 .button10c::before,
@@ -159,48 +181,58 @@ width: 100%;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.2); /* Soft white overlay */
+  background-color: rgba(255,255,255,0.12);
   transition: top 0.4s ease;
   z-index: 0;
 }
+
 .button8c:hover::before,
 .button9c:hover::before,
 .button10c:hover::before,
 .button11c:hover::before {
   top: 0;
 }
-.button8c,
-.button9c,
-.button10c,
-.button11c {
-  position: relative;
-  z-index: 1;
-}
-.button8c,
-.button9c,
-.button10c,
-.button11c {
-  width: 400px;
-}
 
+/* Hit counter spacing */
+.powr-hit-counter {
+  margin-top: 30px;
+}
 </style>
 </head>
+
 <body>
 <canvas id="rippleCanvas"></canvas>
+
 <h1>Вітаємо в технологічному класі!</h1>
+
 <div class="button-container">
   <div class="button-grid">
-<button class="button8c button1" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vSOloz1lWWTTdxQo5UwlKlUqYIGHdD9OWFnT2sHLwKv7jjFiBnJB87EXpaWqVSQfDurA3-HMGO1W7S_/pub'">Інформатика 11-І</button>
-<button class="button8c button2" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vRHFtY2luc6Yyl2jtWKnEQjtP2rqW5rp3-E-OnfYDaC471NNStEMZChODBPw25iS-x_GGm_V7k88glz/pub'">Технології 10-Тт І група</button>
-<button class="button9c button3" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vSr42IGd-1RgWFi62BpkIHu3UJGSmFD5ZPZ95MuXfnkWvevreXszX12YtZ6E2J2zXsjSdv_V3emPW9u/pub'">Технології 10-Тт ІІ група</button>
-<button class="button10c button4" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vTj9FUw1JzEcpN6KS9mcAMnm0Koj8IS8KEHj_LLkwmSYqc-62RFFHywS-d5X8Vl3Xx9YR5_1nhgKVXu/pub'">Технології 11-Тт</button>
-</div>
+
+<button class="button8c button1" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vSOloz1lWWTTdxQo5UwlKlUqYIGHdD9OWFnT2sHLwKv7jjFiBnJB87EXpaWqVSQfDurA3-HMGO1W7S_/pub'">
+Інформатика 11-І
+</button>
+
+<button class="button9c button2" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vRHFtY2luc6Yyl2jtWKnEQjtP2rqW5rp3-E-OnfYDaC471NNStEMZChODBPw25iS-x_GGm_V7k88glz/pub'">
+Технології 10-Тт І група
+</button>
+
+<button class="button9c button3" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vSr42IGd-1RgWFi62BpkIHu3UJGSmFD5ZPZ95MuXfnkWvevreXszX12YtZ6E2J2zXsjSdv_V3emPW9u/pub'">
+Технології 10-Тт ІІ група
+</button>
+
+<button class="button11c button4" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vTj9FUw1JzEcpN6KS9mcAMnm0Koj8IS8KEHj_LLkwmSYqc-62RFFHywS-d5X8Vl3Xx9YR5_1nhgKVXu/pub'">
+Технології 11-Тт
+</button>
+
+  </div>
 </div>
 <h2>Автор: Хоменко Є.Р. 2025-2026 рр.</h2>
-  <!-- Visit Counter -->
+
+<!-- Visit Counter -->
 <div style="text-align:center; margin-top:40px;">
   <div class="powr-hit-counter" id="ee3a7f04_1757398535"></div>
 </div>
+
 <script src="https://www.powr.io/powr.js?platform=html"></script>
 
 <script>
@@ -209,7 +241,6 @@ const ctx = canvas.getContext('2d');
 
 let ripples = [];
 let lastMouseTime = 0;
-
 
 function createRipple(x, y) {
   ripples.push({ x, y, radius: 0, alpha: 1 });
@@ -229,7 +260,6 @@ function drawRipples() {
   });
   requestAnimationFrame(drawRipples);
 }
-// ✅ No rogue setInterval here
 
 function resizeCanvas() {
   canvas.width = window.innerWidth;
@@ -238,25 +268,23 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
-// 🖱️ Mouse ripple effect
+// Mouse ripples
 document.addEventListener('mousemove', (e) => {
   const now = Date.now();
   if (now - lastMouseTime > 150) {
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    createRipple(x, y);
+    createRipple(e.clientX - rect.left, e.clientY - rect.top);
     lastMouseTime = now;
   }
 });
-  document.addEventListener('touchstart', (e) => {
+
+// Touch ripple support
+document.addEventListener('touchstart', (e) => {
   const now = Date.now();
   if (now - lastMouseTime > 150) {
     const touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
-    createRipple(x, y);
+    createRipple(touch.clientX - rect.left, touch.clientY - rect.top);
     lastMouseTime = now;
   }
 });
@@ -265,34 +293,29 @@ let lastTouchTime = 0;
 
 document.addEventListener('touchmove', (e) => {
   const now = Date.now();
-  if (now - lastTouchTime > 300) { // ⏱️ Throttle to every 300ms
+  if (now - lastTouchTime > 300) {
     const touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
-    createRipple(x, y);
+    createRipple(touch.clientX - rect.left, touch.clientY - rect.top);
     lastTouchTime = now;
   }
-}, { passive: true }); // ✅ Passive = allows scrolling
+}, { passive: true });
 
 document.querySelectorAll('button').forEach(btn => {
   btn.addEventListener('touchstart', (e) => {
     const touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
-    createRipple(x, y);
+    createRipple(touch.clientX - rect.left, touch.clientY - rect.top);
   });
 });
-// 🌧️ Ambient ripples — managed version only
+
+// Ambient ripples
 let ambientInterval;
 
 function startAmbientRipples() {
   if (!ambientInterval) {
     ambientInterval = setInterval(() => {
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height;
-      createRipple(x, y);
+      createRipple(Math.random() * canvas.width, Math.random() * canvas.height);
     }, 800);
   }
 }
@@ -303,20 +326,17 @@ function stopAmbientRipples() {
 }
 
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') {
-    startAmbientRipples();
-  } else {
-    stopAmbientRipples();
-  }
+  if (document.visibilityState === 'visible') startAmbientRipples();
+  else stopAmbientRipples();
 });
 
-// Start initially
+// Start
 startAmbientRipples();
 drawRipples();
 </script>
+<div id="stars"></div>
+<div id="stars2"></div>
+<div id="stars3"></div>
+
 </body>
 </html>
-
-
-
-
