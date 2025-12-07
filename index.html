@@ -1,19 +1,17 @@
-<html>
+<!DOCTYPE html>
+<html lang="uk">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-/* ==== GLOBAL DARK THEME ==== */
+/* ==== GLOBAL LIGHT THEME ==== */
 body {
-  background: #111827;
+  background: #ffffff;   /* white background */
   margin: 0;
-  color: #e0e0e0;
+  color: #111827;        /* dark text for readability */
   font-family: system-ui;
-
-  overflow-x: hidden; /* keep clean layout */
-  overflow-y: auto;   /* scrolling restored */
+  overflow-x: hidden;
+  overflow-y: auto;
 }
-
-
 
 /* Background canvas for ripple */
 #rippleCanvas {
@@ -23,10 +21,11 @@ body {
   z-index: -1;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.05);
   pointer-events: none;
 }
-/* === STAR LAYERS — ALL USE INFINITE TILE SCROLL === */
+
+/* === STAR LAYERS === */
 #stars, #stars2, #stars3 {
   position: fixed;
   top: 0;
@@ -35,91 +34,52 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: -2;
-
   background-repeat: repeat;
-  background-size: 450px 450px; /* controls tiling density */
+  background-size: 450px 450px;
 }
 
-
-/* === LAYER 1 — MANY tiny stars === */
+/* Layer 1 */
 #stars {
   background-image:
-    radial-gradient(3px 3px at 10% 15%, rgba(255,255,255,0.6), transparent),
-    radial-gradient(3px 3px at 25% 60%, rgba(255,255,255,0.55), transparent),
-    radial-gradient(3px 3px at 40% 30%, rgba(255,255,255,0.5), transparent),
-    radial-gradient(3px 3px at 60% 85%, rgba(255,255,255,0.45), transparent),
-    radial-gradient(3px 3px at 75% 20%, rgba(255,255,255,0.4), transparent),
-    radial-gradient(3px 3px at 90% 70%, rgba(255,255,255,0.35), transparent),
-    radial-gradient(3px 3px at 5% 90%, rgba(255,255,255,0.4), transparent),
-    radial-gradient(3px 3px at 50% 50%, rgba(255,255,255,0.45), transparent),
-    radial-gradient(3px 3px at 95% 30%, rgba(255,255,255,0.55), transparent),
-    radial-gradient(3px 3px at 35% 10%, rgba(255,255,255,0.5), transparent);
+    radial-gradient(3px 3px at 10% 15%, rgba(0,0,0,0.15), transparent),
+    radial-gradient(3px 3px at 25% 60%, rgba(0,0,0,0.15), transparent),
+    radial-gradient(3px 3px at 40% 30%, rgba(0,0,0,0.15), transparent);
   animation: drift1 480s linear infinite;
-  opacity: 0.9;
+  opacity: 0.6;
 }
 
-
-/* === LAYER 2 — medium bright stars === */
+/* Layer 2 */
 #stars2 {
   background-image:
-    radial-gradient(6px 6px at 15% 25%, rgba(255,255,255,0.9), transparent),
-    radial-gradient(6px 6px at 45% 75%, rgba(255,255,255,0.85), transparent),
-    radial-gradient(6px 6px at 70% 40%, rgba(255,255,255,0.8), transparent),
-    radial-gradient(6px 6px at 85% 65%, rgba(255,255,255,0.8), transparent),
-    radial-gradient(5px 5px at 5% 55%, rgba(255,255,255,0.75), transparent),
-    radial-gradient(5px 5px at 30% 15%, rgba(255,255,255,0.7), transparent),
-    radial-gradient(6px 6px at 95% 80%, rgba(255,255,255,0.85), transparent);
+    radial-gradient(6px 6px at 15% 25%, rgba(0,0,0,0.25), transparent),
+    radial-gradient(6px 6px at 45% 75%, rgba(0,0,0,0.25), transparent);
   animation: drift2 460s linear infinite;
 }
 
-
-/* === LAYER 3 — foreground large stars (twinkling) === */
+/* Layer 3 */
 #stars3 {
   background-image:
-    radial-gradient(9px 9px at 20% 50%, rgba(255,255,255,1), transparent),
-    radial-gradient(9px 9px at 80% 20%, rgba(255,255,255,0.95), transparent),
-    radial-gradient(8px 8px at 55% 10%, rgba(255,255,255,0.9), transparent),
-    radial-gradient(8px 8px at 10% 85%, rgba(255,255,255,1), transparent);
+    radial-gradient(9px 9px at 20% 50%, rgba(0,0,0,0.35), transparent),
+    radial-gradient(9px 9px at 80% 20%, rgba(0,0,0,0.35), transparent);
   animation: drift3 540s linear infinite, twinkle 4s ease-in-out infinite;
 }
 
-
-/* === Infinite scrolling via background-position === */
-@keyframes drift1 {
-  from { background-position: 0 0; }
-  to   { background-position: 0 -4500px; }
-}
-
-@keyframes drift2 {
-  from { background-position: 0 0; }
-  to   { background-position: 0 -6500px; }
-}
-
-@keyframes drift3 {
-  from { background-position: 0 0; }
-  to   { background-position: 0 -9000px; }
-}
-
-
-/* === Twinkling for front stars === */
-@keyframes twinkle {
-  0% { opacity: 0.5; }
-  50% { opacity: 1.0; }
-  100% { opacity: 0.5; }
-}
+/* Animations */
+@keyframes drift1 { from { background-position: 0 0; } to { background-position: 0 -4500px; } }
+@keyframes drift2 { from { background-position: 0 0; } to { background-position: 0 -6500px; } }
+@keyframes drift3 { from { background-position: 0 0; } to { background-position: 0 -9000px; } }
+@keyframes twinkle { 0% { opacity: 0.5; } 50% { opacity: 1.0; } 100% { opacity: 0.5; } }
 
 /* ==== TITLES ==== */
 h1, h2 {
   margin: 20px auto;
   padding: 20px;
   max-width: 90%;
-  box-sizing: border-box;
   text-align: center;
   border-radius: 36px;
-  color: white;
-  background: #525252;
+  color: #ffffff;
+  background: #B0AEAE;
 }
-
 h1 { font-size: 32px; }
 h2 { font-size: 22px; }
 
@@ -130,7 +90,6 @@ h2 { font-size: 22px; }
   align-items: center;
   padding: 40px;
 }
-
 .button-grid {
   display: flex;
   flex-wrap: wrap;
@@ -141,7 +100,6 @@ h2 { font-size: 22px; }
   max-width: 1000px;
   margin: 0 auto;
 }
-
 .button8c, .button9c, .button10c, .button11c {
   width: 100%;
   max-width: 400px;
@@ -157,27 +115,15 @@ h2 { font-size: 22px; }
   transition: background-color 0.3s ease, transform 0.15s;
   z-index: 1;
 }
-
-/* Fixed rising brightness sequence */
-.button8c { background-color: #e3c297; } /* darkest */
-.button9c { background-color: LightSlateGrey; } /* darker */
-.button10c { background-color: #383838; } /* medium-dark */
-.button11c { background-color: #a5b0eb; } /* lightest */
-
-/* Hover brightness bump */
-.button8c:hover,
-.button9c:hover,
-.button10c:hover,
-.button11c:hover {
+.button8c { background-color: #e3c297; }
+.button9c { background-color: #8AA3BD; }
+.button10c { background-color: #383838; }
+.button11c { background-color: #a5b0eb; }
+.button8c:hover, .button9c:hover, .button10c:hover, .button11c:hover {
   filter: brightness(1.25);
   transform: translateY(-3px);
 }
-
-/* Light slide overlay */
-.button8c::before,
-.button9c::before,
-.button10c::before,
-.button11c::before {
+.button8c::before, .button9c::before, .button10c::before, .button11c::before {
   content: "";
   position: absolute;
   top: -100%;
@@ -188,158 +134,114 @@ h2 { font-size: 22px; }
   transition: top 0.4s ease;
   z-index: 0;
 }
-
-.button8c:hover::before,
-.button9c:hover::before,
-.button10c:hover::before,
-.button11c:hover::before {
+.button8c:hover::before, .button9c:hover::before, .button10c:hover::before, .button11c:hover::before {
   top: 0;
 }
+.powr-hit-counter { margin-top: 30px; }
 
-/* Hit counter spacing */
-.powr-hit-counter {
-  margin-top: 30px;
+/* Snow canvas */
+#snowCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
 }
 </style>
 </head>
 
 <body>
 <canvas id="rippleCanvas"></canvas>
-
 <h1>Вітаємо в технологічному класі!</h1>
 
 <div class="button-container">
   <div class="button-grid">
-
-<button class="button8c button1" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vSOloz1lWWTTdxQo5UwlKlUqYIGHdD9OWFnT2sHLwKv7jjFiBnJB87EXpaWqVSQfDurA3-HMGO1W7S_/pub'">
-Інформатика 11-І
-</button>
-
-<button class="button9c button2" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vRHFtY2luc6Yyl2jtWKnEQjtP2rqW5rp3-E-OnfYDaC471NNStEMZChODBPw25iS-x_GGm_V7k88glz/pub'">
-Технології 10-Тт І група
-</button>
-
-<button class="button9c button3" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vSr42IGd-1RgWFi62BpkIHu3UJGSmFD5ZPZ95MuXfnkWvevreXszX12YtZ6E2J2zXsjSdv_V3emPW9u/pub'">
-Технології 10-Тт ІІ група
-</button>
-
-<button class="button11c button4" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vTj9FUw1JzEcpN6KS9mcAMnm0Koj8IS8KEHj_LLkwmSYqc-62RFFHywS-d5X8Vl3Xx9YR5_1nhgKVXu/pub'">
-Технології 11-Тт
-</button>
-
+    <button class="button8c" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vSOloz1lWWTTdxQo5UwlKlUqYIGHdD9OWFnT2sHLwKv7jjFiBnJB87EXpaWqVSQfDurA3-HMGO1W7S_/pub'">Інформатика 11-І</button>
+    <button class="button9c" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vRHFtY2luc6Yyl2jtWKnEQjtP2rqW5rp3-E-OnfYDaC471NNStEMZChODBPw25iS-x_GGm_V7k88glz/pub'">Технології 10-Тт І група</button>
+    <button class="button9c" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vSr42IGd-1RgWFi62BpkIHu3UJGSmFD5ZPZ95MuXfnkWvevreXszX12YtZ6E2J2zXsjSdv_V3emPW9u/pub'">Технології 10-Тт ІІ група</button>
+    <button class="button11c" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vTj9FUw1JzEcpN6KS9mcAMnm0Koj8IS8KEHj_LLkwmSYqc-62RFFHywS-d5X8Vl3Xx9YR5_1nhgKVXu/pub'">Технології 11-Тт</button>
   </div>
 </div>
-<h2>Автор: Хоменко Є.Р. 2025-2026 рр.</h2>
 
-<!-- Visit Counter -->
+<h2>Автор: Хоменко Є.Р. 2025-2026 рр.</h2>
 <div style="text-align:center; margin-top:40px;">
   <div class="powr-hit-counter" id="ee3a7f04_1757398535"></div>
 </div>
 
 <script src="https://www.powr.io/powr.js?platform=html"></script>
+<canvas id="snowCanvas"></canvas>
 
 <script>
-const canvas = document.getElementById('rippleCanvas');
+// --- Snowflakes ---
+const canvas = document.getElementById('snowCanvas');
 const ctx = canvas.getContext('2d');
 
-let ripples = [];
-let lastMouseTime = 0;
-
-function createRipple(x, y) {
-  ripples.push({ x, y, radius: 0, alpha: 1 });
-}
-
-function drawRipples() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ripples.forEach((ripple, index) => {
-    ctx.beginPath();
-    ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
-    ctx.strokeStyle = `rgba(255, 255, 255, ${ripple.alpha})`;
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    ripple.radius += 0.5;
-    ripple.alpha -= 0.005;
-    if (ripple.alpha <= 0) ripples.splice(index, 1);
-  });
-  requestAnimationFrame(drawRipples);
-}
-
-function resizeCanvas() {
+function resize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+resize();
+window.addEventListener('resize', resize);
 
-// Mouse ripples
-document.addEventListener('mousemove', (e) => {
-  const now = Date.now();
-  if (now - lastMouseTime > 150) {
-    const rect = canvas.getBoundingClientRect();
-    createRipple(e.clientX - rect.left, e.clientY - rect.top);
-    lastMouseTime = now;
-  }
-});
+// Reduce flakes for less GPU load
+const MAX_FLAKES = 60;   // was 120
+const flakes = [];
 
-// Touch ripple support
-document.addEventListener('touchstart', (e) => {
-  const now = Date.now();
-  if (now - lastMouseTime > 150) {
-    const touch = e.touches[0];
-    const rect = canvas.getBoundingClientRect();
-    createRipple(touch.clientX - rect.left, touch.clientY - rect.top);
-    lastMouseTime = now;
-  }
-});
+function createFlake() {
+  return {
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 3 + 2,
+    s: Math.random() * 0.4 + 0.2,   // slower speed (was 0.2–1.2)
+    drift: (Math.random() - 0.5) * 0.2  // gentler drift
+  };
+}
 
-let lastTouchTime = 0;
+for (let i = 0; i < MAX_FLAKES; i++) {
+  flakes.push(createFlake());
+}
 
-document.addEventListener('touchmove', (e) => {
-  const now = Date.now();
-  if (now - lastTouchTime > 300) {
-    const touch = e.touches[0];
-    const rect = canvas.getBoundingClientRect();
-    createRipple(touch.clientX - rect.left, touch.clientY - rect.top);
-    lastTouchTime = now;
-  }
-}, { passive: true });
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-document.querySelectorAll('button').forEach(btn => {
-  btn.addEventListener('touchstart', (e) => {
-    const touch = e.touches[0];
-    const rect = canvas.getBoundingClientRect();
-    createRipple(touch.clientX - rect.left, touch.clientY - rect.top);
-  });
-});
+  ctx.fillStyle = "rgba(180, 200, 255, 0.9)";
+  for (let f of flakes) {
+    ctx.beginPath();
+    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+    ctx.fill();
 
-// Ambient ripples
-let ambientInterval;
+    f.y += f.s;
+    f.x += f.drift;
 
-function startAmbientRipples() {
-  if (!ambientInterval) {
-    ambientInterval = setInterval(() => {
-      createRipple(Math.random() * canvas.width, Math.random() * canvas.height);
-    }, 800);
+    if (f.y > canvas.height) {
+      f.y = -5;
+      f.x = Math.random() * canvas.width;
+    }
+    if (f.x < 0) f.x = canvas.width;
+    if (f.x > canvas.width) f.x = 0;
   }
 }
 
-function stopAmbientRipples() {
-  clearInterval(ambientInterval);
-  ambientInterval = null;
+// Instead of requestAnimationFrame → throttle with setInterval
+let snowInterval;
+function startSnow() {
+  if (!snowInterval) {
+    snowInterval = setInterval(draw, 25); // ~20 FPS (slower, less GPU)
+  }
+}
+function stopSnow() {
+  clearInterval(snowInterval);
+  snowInterval = null;
 }
 
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') startAmbientRipples();
-  else stopAmbientRipples();
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") startSnow();
+  else stopSnow();
 });
 
-// Start
-startAmbientRipples();
-drawRipples();
+startSnow();
 </script>
-<div id="stars"></div>
-<div id="stars2"></div>
-<div id="stars3"></div>
-
 </body>
 </html>
