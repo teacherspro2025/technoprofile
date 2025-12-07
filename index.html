@@ -13,63 +13,6 @@ body {
   overflow-y: auto;
 }
 
-/* Background canvas for ripple */
-#rippleCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.05);
-  pointer-events: none;
-}
-
-/* === STAR LAYERS === */
-#stars, #stars2, #stars3 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: -2;
-  background-repeat: repeat;
-  background-size: 450px 450px;
-}
-
-/* Layer 1 */
-#stars {
-  background-image:
-    radial-gradient(3px 3px at 10% 15%, rgba(0,0,0,0.15), transparent),
-    radial-gradient(3px 3px at 25% 60%, rgba(0,0,0,0.15), transparent),
-    radial-gradient(3px 3px at 40% 30%, rgba(0,0,0,0.15), transparent);
-  animation: drift1 480s linear infinite;
-  opacity: 0.6;
-}
-
-/* Layer 2 */
-#stars2 {
-  background-image:
-    radial-gradient(6px 6px at 15% 25%, rgba(0,0,0,0.25), transparent),
-    radial-gradient(6px 6px at 45% 75%, rgba(0,0,0,0.25), transparent);
-  animation: drift2 460s linear infinite;
-}
-
-/* Layer 3 */
-#stars3 {
-  background-image:
-    radial-gradient(9px 9px at 20% 50%, rgba(0,0,0,0.35), transparent),
-    radial-gradient(9px 9px at 80% 20%, rgba(0,0,0,0.35), transparent);
-  animation: drift3 540s linear infinite, twinkle 4s ease-in-out infinite;
-}
-
-/* Animations */
-@keyframes drift1 { from { background-position: 0 0; } to { background-position: 0 -4500px; } }
-@keyframes drift2 { from { background-position: 0 0; } to { background-position: 0 -6500px; } }
-@keyframes drift3 { from { background-position: 0 0; } to { background-position: 0 -9000px; } }
-@keyframes twinkle { 0% { opacity: 0.5; } 50% { opacity: 1.0; } 100% { opacity: 0.5; } }
-
 /* ==== TITLES ==== */
 h1, h2 {
   margin: 20px auto;
@@ -153,7 +96,6 @@ h2 { font-size: 22px; }
 </head>
 
 <body>
-<canvas id="rippleCanvas"></canvas>
 <h1>Вітаємо в технологічному класі!</h1>
 
 <div class="button-container">
