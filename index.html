@@ -1,20 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-/* ==== GLOBAL LIGHT THEME ==== */
 body {
-  background: #ffffff;   /* white background */
+  background: #0f172a;  
   margin: 0;
-  color: #111827;        /* dark text for readability */
+  color: #e2e8f0;     
   font-family: system-ui;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-/* ==== TITLES ==== */
 h1, h2 {
   margin: 20px auto;
   padding: 20px;
@@ -22,12 +19,13 @@ h1, h2 {
   text-align: center;
   border-radius: 36px;
   color: #ffffff;
-  background: #B0AEAE;
+  background: #1e293b; 
+  border: 1px solid #334155;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
 }
 h1 { font-size: 32px; }
 h2 { font-size: 22px; }
 
-/* ==== BUTTON GRID ==== */
 .button-container {
   display: flex;
   justify-content: center;
@@ -44,6 +42,7 @@ h2 { font-size: 22px; }
   max-width: 1000px;
   margin: 0 auto;
 }
+
 .button8c, .button9c, .button10c, .button11c {
   width: 100%;
   max-width: 400px;
@@ -56,35 +55,26 @@ h2 { font-size: 22px; }
   color: #fff;
   position: relative;
   overflow: hidden;
-  transition: background-color 0.3s ease, transform 0.15s;
+  transition: all 0.3s ease;
   z-index: 1;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
-.button8c { background-color: #e3c297; }
-.button9c { background-color: #8AA3BD; }
-.button10c { background-color: #383838; }
-.button11c { background-color: #a5b0eb; }
-.button8c:hover, .button9c:hover, .button10c:hover, .button11c:hover {
-  filter: brightness(1.1);
-  transform: translateY(-3px);
-}
-.button8c::before, .button9c::before, .button10c::before, .button11c::before {
-  content: "";
-  position: absolute;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255,255,255,0.12);
-  transition: top 0.4s ease;
-  z-index: 0;
-}
-.button8c:hover::before, .button9c:hover::before, .button10c:hover::before, .button11c:hover::before {
-  top: 0;
-}
-.powr-hit-counter { margin-top: 30px; }
 
-/* Snow canvas */
-#snowCanvas {
+.button8c { background-color: #065f46; border-bottom: 4px solid #10b981; } 
+.button9c { background-color: #831843; border-bottom: 4px solid #ec4899; } 
+.button10c { background-color: #1e3a8a; border-bottom: 4px solid #3b82f6; } 
+.button11c { background-color: #4c1d95; border-bottom: 4px solid #8b5cf6; } 
+
+.button8c:hover, .button9c:hover, .button10c:hover, .button11c:hover {
+  filter: brightness(1.2);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+}
+
+.powr-hit-counter { margin-top: 30px; filter: invert(1); } 
+
+
+#fireflyCanvas {
   position: fixed;
   top: 0;
   left: 0;
@@ -95,34 +85,29 @@ h2 { font-size: 22px; }
 }
 </style>
 </head>
-
 <body>
+
 <h1>Вітаємо в технологічному класі!</h1>
 
 <div class="button-container">
   <div class="button-grid">
-    <button class="button8c" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vSOloz1lWWTTdxQo5UwlKlUqYIGHdD9OWFnT2sHLwKv7jjFiBnJB87EXpaWqVSQfDurA3-HMGO1W7S_/pub'">Інформатика 11-І</button>
-    <button class="button9c" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vRHFtY2luc6Yyl2jtWKnEQjtP2rqW5rp3-E-OnfYDaC471NNStEMZChODBPw25iS-x_GGm_V7k88glz/pub'">Технології 10-Тт І група</button>
-    <button class="button9c" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vSr42IGd-1RgWFi62BpkIHu3UJGSmFD5ZPZ95MuXfnkWvevreXszX12YtZ6E2J2zXsjSdv_V3emPW9u/pub'">Технології 10-Тт ІІ група</button>
-    <button class="button11c" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vTj9FUw1JzEcpN6KS9mcAMnm0Koj8IS8KEHj_LLkwmSYqc-62RFFHywS-d5X8Vl3Xx9YR5_1nhgKVXu/pub'">Технології 11-Тт</button>
-    <button class="button8c" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vTEVtbsk8kPJTzVKHYLEGlMiPeh0m8aqjLn98pGnanPx06SajmMVe9EPt8v6i-AMZ13n1JTHctYTkXY/pub'">Інформатика 10-Тт</button>
-    <button class="button9c" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vSLa9gSWF__Cvl8PwJHu9jFAHfPdhPkagTEY9R62I-TXwqTqI1OLhY8EZILkBS62bXMJ5TndZklIMyx/pub'">Інформатика 10-Ф</button>
-    <button class="button9c" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vQh8ue9E8FM0SoTDvSVGuvKY4ugOQJ4abOJwTqrQBn_e1s_k5S0fDLgxuRbP2LWjpCtslRellSBEqo3/pub'">Інформатика 10-І</button>
-    <button class="button11c" onclick="location.href='https://docs.google.com/document/d/e/2PACX-1vSebvFIBFDrJqzw22ktLRLVEt5oHEPqwNNBTUtJsCRYC-8WQrHroPouQoysl-4wWdfjaW-fUti5L7hi/pub'">Інформатика 10-П</button>
+    <button class="button8c" onclick="location.href='...'">Інформатика 11-І</button>
+    <button class="button9c" onclick="location.href='...'">Технології 10-Тт І група</button>
+    <button class="button9c" onclick="location.href='...'">Технології 10-Тт ІІ група</button>
+    <button class="button11c" onclick="location.href='...'">Технології 11-Тт</button>
+    <button class="button8c" onclick="location.href='...'">Інформатика 10-Тт</button>
+    <button class="button9c" onclick="location.href='...'">Інформатика 10-Ф</button>
+    <button class="button9c" onclick="location.href='...'">Інформатика 10-І</button>
+    <button class="button11c" onclick="location.href='...'">Інформатика 10-П</button>
   </div>
 </div>
 
 <h2>Автор: Хоменко Є.Р. 2025-2026 рр.</h2>
-<div style="text-align:center; margin-top:40px;">
-  <div class="powr-hit-counter" id="ee3a7f04_1757398535"></div>
-</div>
 
-<script src="https://www.powr.io/powr.js?platform=html"></script>
-<canvas id="snowCanvas"></canvas>
+<canvas id="fireflyCanvas"></canvas>
 
 <script>
-// --- Snowflakes ---
-const canvas = document.getElementById('snowCanvas');
+const canvas = document.getElementById('fireflyCanvas');
 const ctx = canvas.getContext('2d');
 
 function resize() {
@@ -132,64 +117,62 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
-// Reduce flakes for less GPU load
-const MAX_FLAKES = 60;   // was 120
-const flakes = [];
+const MAX_FIREFLIES = 50; 
+const fireflies = [];
 
-function createFlake() {
+function createFirefly() {
   return {
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
-    r: Math.random() * 3 + 2,
-    s: Math.random() * 0.4 + 0.2,   // slower speed (was 0.2–1.2)
-    drift: (Math.random() - 0.5) * 0.2  // gentler drift
+    s: Math.random() * 2 + 1,
+    angle: Math.random() * Math.PI * 2,
+    speed: Math.random() * 0.5 + 0.2,
+    opacity: Math.random(),
+    fadeSpeed: Math.random() * 0.02 + 0.005,
+    growing: true
   };
 }
 
-for (let i = 0; i < MAX_FLAKES; i++) {
-  flakes.push(createFlake());
+for (let i = 0; i < MAX_FIREFLIES; i++) {
+  fireflies.push(createFirefly());
 }
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "rgba(180, 200, 255, 0.9)";
-  for (let f of flakes) {
-    ctx.beginPath();
-    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-    ctx.fill();
-
-    f.y += f.s;
-    f.x += f.drift;
-
-    if (f.y > canvas.height) {
-      f.y = -5;
-      f.x = Math.random() * canvas.width;
+  for (let f of fireflies) {
+    // Pulse effect
+    if (f.growing) {
+      f.opacity += f.fadeSpeed;
+      if (f.opacity >= 0.8) f.growing = false;
+    } else {
+      f.opacity -= f.fadeSpeed;
+      if (f.opacity <= 0.1) f.growing = true;
     }
+
+    f.x += Math.cos(f.angle) * f.speed;
+    f.y += Math.sin(f.angle) * f.speed;
+    f.angle += Math.random() * 0.1 - 0.05;
+
+ 
     if (f.x < 0) f.x = canvas.width;
     if (f.x > canvas.width) f.x = 0;
+    if (f.y < 0) f.y = canvas.height;
+    if (f.y > canvas.height) f.y = 0;
+
+   
+    ctx.beginPath();
+    ctx.arc(f.x, f.y, f.s, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(250, 255, 150, ${f.opacity})`; 
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = "yellow";
+    ctx.fill();
+    ctx.shadowBlur = 0; 
   }
+  requestAnimationFrame(draw);
 }
 
-// Instead of requestAnimationFrame → throttle with setInterval
-let snowInterval;
-function startSnow() {
-  if (!snowInterval) {
-    snowInterval = setInterval(draw, 25); // ~20 FPS (slower, less GPU)
-  }
-}
-function stopSnow() {
-  clearInterval(snowInterval);
-  snowInterval = null;
-}
-
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "visible") startSnow();
-  else stopSnow();
-});
-
-startSnow();
+draw();
 </script>
 </body>
 </html>
-
